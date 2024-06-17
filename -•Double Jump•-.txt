@@ -13,22 +13,21 @@ wait()
 end
 end
 
-local function onStatChanged(oldState, newState)
-if Enum.HumanoidStateType.Landed == newState then
-numJumps = 0
-canJumpAgain = false
-elseif Enum.HumanoidStateType.Freefall == newState then
-wait(TIME_BETWEEN_JUMPS)
-canJumpAgain = true
-elseif Enum.HumanoidStateType.Jumping == newState then
+local function onStatChanged(state)
+if state == "GettingUp" or state == "Jumping" or state == "FreeFall" then
 canJumpAgain = false
 numJumps += 1
+elseif state == "Running" or state == "Idle" then
+canJumpAgain = true
+numJumps = 0
 end
 end
 
 local function onJumpRequest()
 if canJumpAgain and numJumps < MAX_JUMPS then
-humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+humanoid.JumpPower = 50
+wait(0.1)
+humanoid.JumpPower = 0
 end
 end
 
