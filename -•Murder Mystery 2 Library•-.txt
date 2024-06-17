@@ -16,7 +16,7 @@ loadstring(game:HttpGet('https://raw.githubusercontent.com/Gi7331/scripts/main/E
 end)
 
 tab.newButton("Chams", "ESP", function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Ihaveash0rtnamefordiscord/Releases/main/MurderMystery2HighlightESP"))(' Watermelon ?')
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Ihaveash0rtnamefordiscord/Releases/main/MurderMystery2HighlightESP"))()
 end)
 
 tab.newButton("Double Jump", "×2 Jump", function()
