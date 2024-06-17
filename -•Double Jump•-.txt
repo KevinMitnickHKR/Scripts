@@ -1,32 +1,46 @@
 local UserInputService = game:GetService("UserInputService")
 local player = game:GetService("Players").LocalPlayer
-local character = player.Character
-local humanoid = character:WaitForChild("Humanoid")
-
 local MAX_JUMPS = 2
 local TIME_BETWEEN_JUMPS = 0.2
 local numJumps = 0
 local canJumpAgain = false
+local humanoid
+
+local function getHumanoid()
+while not humanoid do
+humanoid = player.Character:WaitForChild("Humanoid")
+wait()
+end
+end
 
 local function onStatChanged(oldState, newState)
-	if Enum.HumanoidStateType.Landed == newState then
-		numJumps = 0
-		canJumpAgain = false
-	elseif Enum.HumanoidStateType.Freefall == newState then
-		wait(TIME_BETWEEN_JUMPS)
-		canJumpAgain = true
-	elseif Enum.HumanoidStateType.Jumping  ==  newState then
-		canJumpAgain = false
-		numJumps += 1
-	end
-	
+if Enum.HumanoidStateType.Landed == newState then
+numJumps = 0
+canJumpAgain = false
+elseif Enum.HumanoidStateType.Freefall == newState then
+wait(TIME_BETWEEN_JUMPS)
+canJumpAgain = true
+elseif Enum.HumanoidStateType.Jumping == newState then
+canJumpAgain = false
+numJumps += 1
+end
 end
 
 local function onJumpRequest()
-	if canJumpAgain and numJumps < MAX_JUMPS then
-		humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
-	end
+if canJumpAgain and numJumps < MAX_JUMPS then
+humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+end
 end
 
+local function onCharacterAdded(newCharacter)
+humanoid = nil
+numJumps = 0
+canJumpAgain = false
+getHumanoid()
+humanoid.StateChanged:Connect(onStatChanged)
+end
+
+getHumanoid()
 humanoid.StateChanged:Connect(onStatChanged)
 UserInputService.JumpRequest:Connect(onJumpRequest)
+player.CharacterAdded:Connect(onCharacterAdded)
