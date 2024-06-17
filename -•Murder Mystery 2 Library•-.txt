@@ -66,6 +66,7 @@ getHumanoid()
 humanoid.StateChanged:Connect(onStatChanged)
 UserInputService.JumpRequest:Connect(onJumpRequest)
 player.CharacterAdded:Connect(onCharacterAdded)
+
 end)
 
 tab.newButton("Hitbox (8)", "Hitbox Knife", function()
