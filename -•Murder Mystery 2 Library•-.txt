@@ -1,0 +1,69 @@
+local DrRayLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/AZYsGithub/DrRay-UI-Library/main/DrRay.lua"))()
+local window = DrRayLibrary:Load("-•Murder Mystery 2 Library•-", "Default")
+
+local tab = DrRayLibrary.newTab("-•Main•-", "ImageIdHere")
+
+tab.newButton("Highlight Hub", "Murder Mystery 2 GUI", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ThatSick/HighlightMM2/main/Main"))()
+end)
+
+tab.newButton("FE Bundles", "FE Bundles (Animation Bundle)", function()
+loadstring(game:HttpGet("https://scriptblox.com/raw/Universal-Script-Free-Bundles-R15-3356"))()
+end)
+
+tab.newButton("FE Emotes", "FE Emotes (Emotes)", function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/Gi7331/scripts/main/Emote.lua'))()
+end)
+
+tab.newButton("Double Jump", "×2 Jump", function()
+local UserInputService = game:GetService("UserInputService")
+local player = game:GetService("Players").LocalPlayer
+local MAX_JUMPS = 2
+local TIME_BETWEEN_JUMPS = 0.2
+local numJumps = 0
+local canJumpAgain = false
+local humanoid
+
+local function getHumanoid()
+while not humanoid do
+humanoid = player.Character:WaitForChild("Humanoid")
+wait()
+end
+end
+
+local function onStatChanged(oldState, newState)
+if Enum.HumanoidStateType.Landed == newState then
+numJumps = 0
+canJumpAgain = false
+elseif Enum.HumanoidStateType.Freefall == newState then
+wait(TIME_BETWEEN_JUMPS)
+canJumpAgain = true
+elseif Enum.HumanoidStateType.Jumping == newState then
+canJumpAgain = false
+numJumps += 1
+end
+end
+
+local function onJumpRequest()
+if canJumpAgain and numJumps < MAX_JUMPS then
+humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+end
+end
+
+local function onCharacterAdded(newCharacter)
+humanoid = nil
+numJumps = 0
+canJumpAgain = false
+getHumanoid()
+humanoid.StateChanged:Connect(onStatChanged)
+end
+
+getHumanoid()
+humanoid.StateChanged:Connect(onStatChanged)
+UserInputService.JumpRequest:Connect(onJumpRequest)
+player.CharacterAdded:Connect(onCharacterAdded)
+end)
+
+tab.newButton("Hitbox (8)", "Hitbox Knife", function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/KevinMitnickHKR/Scripts/main/-•Hitbox (8)•-.txt'))()
+end)
