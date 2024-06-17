@@ -20,7 +20,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Ihaveash0rtnamefordis
 end)
 
 tab.newButton("Double Jump", "×2 Jump", function()
-loadstring(game:HttpGet('https://raw.githubusercontent.com/KevinMitnickHKR/Scripts/main/-•Double Jump•-.txt''))()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/KevinMitnickHKR/Scripts/main/-•Double Jump•-.txt'))()
 end)
 
 tab.newButton("Hitbox (8)", "Hitbox Knife", function()
