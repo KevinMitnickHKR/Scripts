@@ -15,6 +15,10 @@ tab.newButton("FE Emotes", "FE Emotes (Emotes)", function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/Gi7331/scripts/main/Emote.lua'))()
 end)
 
+tab.newButton("Chams", "ESP", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Ihaveash0rtnamefordiscord/Releases/main/MurderMystery2HighlightESP"))(' Watermelon ?')
+end)
+
 tab.newButton("Double Jump", "×2 Jump", function()
 local UserInputService = game:GetService("UserInputService")
 local player = game:GetService("Players").LocalPlayer
